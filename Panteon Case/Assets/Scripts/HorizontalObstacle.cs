@@ -11,7 +11,15 @@ public class HorizontalObstacle : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        direction = 1;
+        int randomNum = Random.Range(0, 2);
+        if (randomNum == 0)
+        {
+            direction = 1;
+        }
+        else
+        {
+            direction = -1;
+        }
         floorLength = floor.GetComponent<MeshRenderer>().bounds.extents.x;
     }
 
