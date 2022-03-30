@@ -33,13 +33,4 @@ public class PlayerCollision : MonoBehaviour
             rb.AddRelativeForce( moveDirection.normalized *Time.deltaTime*thrust,ForceMode.Impulse);
         }
     }
-
-    private void OnCollisionExit(Collision other)
-    {
-        if (other.gameObject.CompareTag("RotPlat"))
-        {
-            //gameObject.transform.parent = null;
-            //gameObject.transform.rotation= Quaternion.Euler(0,0,0);
-        }
-    }
 }

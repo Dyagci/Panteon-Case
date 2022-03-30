@@ -213,7 +213,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2902099247411685543, guid: 7ab3920a2e4fd7a4f943f606b37c0de2, type: 3}
       propertyPath: m_Name
-      value: Rotator
+      value: Rotator Variant 1
       objectReference: {fileID: 0}
     - target: {fileID: 2902099247411685543, guid: 7ab3920a2e4fd7a4f943f606b37c0de2, type: 3}
       propertyPath: m_TagString
@@ -257,6 +257,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dc42a2d87b254444fba28f8082fd5221, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rotateSpeed: 2
+  rotateSpeed: 5
   direction: 0
   rotateAngle: 30

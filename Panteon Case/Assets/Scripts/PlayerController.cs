@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -10,10 +11,12 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private float movementAmount;
     private float firstMousePos;
+    private Quaternion iniRot;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         move = Vector3.forward * forwardSpeed;
+        iniRot = transform.rotation;
     }
 
     private void Update()
@@ -39,5 +42,10 @@ public class PlayerController : MonoBehaviour
             move = Vector3.forward * forwardSpeed;
         }
         rb.velocity = move;
+    }
+
+    private void LateUpdate()
+    {
+        transform.rotation = iniRot;
     }
 }
