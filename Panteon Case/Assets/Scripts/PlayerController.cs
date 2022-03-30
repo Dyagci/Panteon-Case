@@ -12,16 +12,27 @@ public class PlayerController : MonoBehaviour
     private float movementAmount;
     private float firstMousePos;
     private Quaternion iniRot;
+    public bool passedFinish;
+    public GameObject wall;
+    public Texture2D wallTexture;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         move = Vector3.forward * forwardSpeed;
         iniRot = transform.rotation;
+        passedFinish = false;
     }
 
     private void Update()
     {
-        Movement();
+        if (!passedFinish)
+        {
+            Movement();
+        }
+        else if (passedFinish)
+        {
+            PaintWall();
+        }
     }
     
     private void Movement()
@@ -47,5 +58,18 @@ public class PlayerController : MonoBehaviour
     private void LateUpdate()
     {
         transform.rotation = iniRot;
+    }
+
+    private void PaintWall()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            firstMousePos = Input.mousePosition.x;
+        }
+        else if(Input.GetMouseButton(0))
+        {
+            firstMousePos = Input.mousePosition.x;
+            wall.GetComponent<MeshRenderer>().material.SetTexture();
+        }
     }
 }
