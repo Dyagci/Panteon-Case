@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
@@ -31,7 +32,7 @@ public class PlayerController : MonoBehaviour
         }
         else if (passedFinish)
         {
-            PaintWall();
+            //PaintWall();
         }
     }
     
@@ -62,14 +63,6 @@ public class PlayerController : MonoBehaviour
 
     private void PaintWall()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            firstMousePos = Input.mousePosition.x;
-        }
-        else if(Input.GetMouseButton(0))
-        {
-            firstMousePos = Input.mousePosition.x;
-            wall.GetComponent<MeshRenderer>().material.SetTexture();
-        }
+
     }
 }

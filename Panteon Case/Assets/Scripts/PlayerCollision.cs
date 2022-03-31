@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 
 public class PlayerCollision : MonoBehaviour
@@ -12,18 +13,24 @@ public class PlayerCollision : MonoBehaviour
     private Vector3 paintPos;
     private Rigidbody rb;
     private bool finished;
+    public CinemachineVirtualCamera vcam1;
+    public CinemachineVirtualCamera vcam2;
+    Animator animator;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
+        animator = GetComponent<Animator>();
         paintPos = paintPosRef.transform.position;
         finished = false;
     }
 
     private void Update()
     {
-        if (finished && transform.position.z != paintPos.z)
+        if (finished && !animator.GetBool("isIdle"))
         {
             MovePaintPos();
+            vcam1.Priority = 0;
+            vcam2.Priority = 1;
         }
     }
 
@@ -56,6 +63,10 @@ public class PlayerCollision : MonoBehaviour
             GetComponent<PlayerController>().passedFinish = true;
             rb.velocity = Vector3.zero;
             finished = true;
+        }
+        else if (other.gameObject.CompareTag("PaintPos"))
+        {
+            animator.SetBool("isIdle",true);
         }
     }
 

@@ -8,6 +8,9 @@ TagManager:
   - RotPlat
   - RotStick
   - DonutObs
+  - FinishLine
+  - Floor
+  - Wall
   layers:
   - Default
   - TransparentFX
