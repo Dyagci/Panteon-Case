@@ -1,37 +1,40 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.UIElements;
 
 public class Painter : MonoBehaviour
 {
     [SerializeField] private int penSize = 5;
     private Renderer renderer;
-    private Color[] colors;
     public Camera cam;
     private RaycastHit hit;
-    private Wall wall;
+    public Wall wall;
     [SerializeField]private Vector2 touchPos,lastTouchPos;
     private bool touchedLastFrame;
-
-    private int totalPixels;
-
-    [SerializeField]private int paintedPixels;
+    private int[,] pixels;
+    [SerializeField]private double totalPixels;
+    public double paintedPercentage;
+    [SerializeField]private double paintedPixels;
+    private string percentage;
+    public Text percentageText;
     // Start is called before the first frame update
     void Start()
     {
-        //renderer = GetComponent<Renderer>();
-        colors = Enumerable.Repeat(Color.red, penSize * penSize).ToArray();
-        //tipHeight = tip.localScale.y;
-        totalPixels = 2048 * 2048;
-
+        pixels= new int[(int)(wall.textureSize.x), (int)(wall.textureSize.y)];
+        totalPixels = (int) (wall.textureSize.x) * (int) (wall.textureSize.y);
     }
 
     // Update is called once per frame
     void Update()
     {
+        paintedPercentage = paintedPixels / totalPixels *100 ;
+        percentageText.text = String.Format("{0:0.00}",paintedPercentage);
         if (Input.GetMouseButtonDown(0))
         {
             var Ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -39,10 +42,6 @@ public class Painter : MonoBehaviour
             {
                 if (hit.transform.CompareTag("Wall"))
                 {
-                    if (wall == null)
-                    {
-                        wall = hit.transform.GetComponent<Wall>();
-                    }
 
                     touchPos = new Vector2(hit.textureCoord.x, hit.textureCoord.y);
 
@@ -51,8 +50,6 @@ public class Painter : MonoBehaviour
                     lastTouchPos = new Vector2(x, y);
                 }
             }
-
-            
         }
         else if (Input.GetMouseButton(0))
         {
@@ -82,19 +79,6 @@ public class Painter : MonoBehaviour
                 }
                 if (touchedLastFrame)
                 {
-                    if (x > 2010 || y > 2010 || x < 0 || y < 0)
-                    {
-                        return;
-                    }
-                    else
-                    {
-                        if (wall.texture.GetPixel(x, y).ToString() != "RGBA(1.000, 0.000, 0.000, 1.000)")
-                        {
-                           paintedPixels++;
-                        }
-                        wall.texture.SetPixels(x,y,penSize,penSize,colors);
-                        
-                    }
                     for (float f = 0.01f; f < 1.00f; f+=0.01f)
                     {
                         
@@ -105,32 +89,34 @@ public class Painter : MonoBehaviour
                             return;
                             
                         }
-                        if (lerpX > 2010 || lerpY > 2010 || lerpX < 0 || lerpY < 0)
-                        {
-                            return;
-                        }
-                        else
-                        {
-                            if (wall.texture.GetPixel(lerpX, lerpY).ToString() != "RGBA(1.000, 0.000, 0.000, 1.000)")
+                        for (int i = -penSize; i < penSize/2; i++)
+                        {   
+                            for (int j = -penSize; j < penSize/2; j++)
                             {
-                                paintedPixels++;
+                                if (lerpX+i>0 &&lerpX+i<2048 &&lerpY+j>0 &&lerpY+j<2048)
+                                {
+                                    if (pixels[lerpX + i, lerpY + j] !=1)
+                                    {
+                                        pixels[lerpX + i, lerpY + j] = 1;
+                                        paintedPixels++;
+                                        wall.texture.SetPixel(lerpX+i,lerpY+j,Color.red);
+                                    }
+                                }
                             }
-                            wall.texture.SetPixels(lerpX,lerpY,penSize,penSize,colors);
-                            
-
                         }
                     }
-                    
+
                     wall.texture.Apply();
                 }
-
                 lastTouchPos = new Vector2(x, y);
                 touchedLastFrame = true;
                 return;
             }
-            
         }
-
+        else
+        {
+            return;
+        }
         wall = null;
         touchedLastFrame = false;
     }
