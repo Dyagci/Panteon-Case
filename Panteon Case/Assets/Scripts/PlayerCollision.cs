@@ -8,14 +8,16 @@ public class PlayerCollision : MonoBehaviour
 {
     [SerializeField] private Vector3 moveDirection;
     [SerializeField] private int thrust;
+    public CinemachineVirtualCamera vcam1;
+    public CinemachineVirtualCamera vcam2;
     public GameObject startReference;
     public GameObject paintPosRef;
     private Vector3 paintPos;
     private Rigidbody rb;
     private bool finished;
-    public CinemachineVirtualCamera vcam1;
-    public CinemachineVirtualCamera vcam2;
-    Animator animator;
+    private Animator animator;
+    
+    
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -26,14 +28,17 @@ public class PlayerCollision : MonoBehaviour
 
     private void Update()
     {
-        if (finished && !animator.GetBool("isIdle"))
+        if (finished)
         {
             MovePaintPos();
-            vcam1.Priority = 0;
-            vcam2.Priority = 1;
+            if (animator.GetBool("isIdle"))
+            {
+                vcam1.Priority = 0;
+                vcam2.Priority = 1;
+                rb.isKinematic = true;
+            }
         }
     }
-
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
@@ -61,17 +66,18 @@ public class PlayerCollision : MonoBehaviour
         if (other.gameObject.CompareTag("FinishLine"))
         {
             GetComponent<PlayerController>().passedFinish = true;
-            rb.velocity = Vector3.zero;
+            
             finished = true;
         }
         else if (other.gameObject.CompareTag("PaintPos"))
         {
+            rb.velocity = Vector3.zero;
             animator.SetBool("isIdle",true);
         }
     }
 
     private void MovePaintPos()
     {
-        transform.position = Vector3.MoveTowards(transform.position,paintPos,0.2f*Time.deltaTime);
+        transform.position = Vector3.MoveTowards(transform.position,paintPos,0.6f*Time.deltaTime);
     }
 }

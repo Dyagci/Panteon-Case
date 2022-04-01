@@ -10,18 +10,20 @@ using UnityEngine.UIElements;
 
 public class Painter : MonoBehaviour
 {
+    [SerializeField] private double paintedPixels;
+    [SerializeField] private double totalPixels;
     [SerializeField] private int penSize = 5;
-    private Renderer renderer;
+    [SerializeField] private Vector2 touchPos;
+    [SerializeField] private Vector2 lastTouchPos;
+    public double paintedPercentage;
     public Camera cam;
-    private RaycastHit hit;
     public Wall wall;
-    [SerializeField]private Vector2 touchPos,lastTouchPos;
     private bool touchedLastFrame;
     private int[,] pixels;
-    [SerializeField]private double totalPixels;
-    public double paintedPercentage;
-    [SerializeField]private double paintedPixels;
+    private RaycastHit hit;
     private string percentage;
+    private Renderer renderer;
+    
     public Text percentageText;
     // Start is called before the first frame update
     void Start()
@@ -34,7 +36,7 @@ public class Painter : MonoBehaviour
     void Update()
     {
         paintedPercentage = paintedPixels / totalPixels *100 ;
-        percentageText.text = String.Format("{0:0.00}",paintedPercentage);
+        percentageText.text = "%" + String.Format("{0:0.00}",paintedPercentage);
         if (Input.GetMouseButtonDown(0))
         {
             var Ray = cam.ScreenPointToRay(Input.mousePosition);
@@ -70,13 +72,8 @@ public class Painter : MonoBehaviour
                     wall = hit.transform.GetComponent<Wall>();
                 }
                 touchPos = new Vector2(hit.textureCoord.x, hit.textureCoord.y);
-                
                 var x = (int) (touchPos.x * wall.textureSize.x - (penSize / 2));
                 var y = (int) (touchPos.y * wall.textureSize.y - (penSize / 2));
-                if (y < 0 || y > wall.textureSize.y || x < 0 || x > wall.textureSize.x)
-                {
-                    return;
-                }
                 if (touchedLastFrame)
                 {
                     for (float f = 0.01f; f < 1.00f; f+=0.01f)
@@ -93,7 +90,7 @@ public class Painter : MonoBehaviour
                         {   
                             for (int j = -penSize; j < penSize/2; j++)
                             {
-                                if (lerpX+i>0 &&lerpX+i<2048 &&lerpY+j>0 &&lerpY+j<2048)
+                                if (lerpX+i>0 &&lerpX+i<wall.textureSize.x &&lerpY+j>0 &&lerpY+j<wall.textureSize.y)
                                 {
                                     if (pixels[lerpX + i, lerpY + j] !=1)
                                     {
@@ -105,7 +102,6 @@ public class Painter : MonoBehaviour
                             }
                         }
                     }
-
                     wall.texture.Apply();
                 }
                 lastTouchPos = new Vector2(x, y);
@@ -117,7 +113,7 @@ public class Painter : MonoBehaviour
         {
             return;
         }
-        wall = null;
+        //wall = null;
         touchedLastFrame = false;
     }
 }

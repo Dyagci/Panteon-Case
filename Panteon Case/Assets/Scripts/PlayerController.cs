@@ -9,13 +9,14 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float horizontalSpeed;
     [SerializeField] private float forwardSpeed;
     [SerializeField] Vector3 move;
-    private Rigidbody rb;
+    public GameObject wall;
+    public Texture2D wallTexture;
+    public bool passedFinish;
     private float movementAmount;
     private float firstMousePos;
     private Quaternion iniRot;
-    public bool passedFinish;
-    public GameObject wall;
-    public Texture2D wallTexture;
+    private Rigidbody rb;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -23,19 +24,13 @@ public class PlayerController : MonoBehaviour
         iniRot = transform.rotation;
         passedFinish = false;
     }
-
     private void Update()
     {
         if (!passedFinish)
         {
             Movement();
         }
-        else if (passedFinish)
-        {
-            //PaintWall();
-        }
     }
-    
     private void Movement()
     {
         if (Input.GetMouseButtonDown(0))
@@ -59,10 +54,5 @@ public class PlayerController : MonoBehaviour
     private void LateUpdate()
     {
         transform.rotation = iniRot;
-    }
-
-    private void PaintWall()
-    {
-
     }
 }

@@ -6,9 +6,8 @@ public class HorizontalObstacle : MonoBehaviour
 {
     [SerializeField] float floorLength;
     [SerializeField] float obstacleSpeed;
-    int direction;
     public GameObject floor;
-    // Start is called before the first frame update
+    private int direction;
     void Start()
     {
         int randomNum = Random.Range(0, 2);
@@ -22,8 +21,6 @@ public class HorizontalObstacle : MonoBehaviour
         }
         floorLength = floor.GetComponent<MeshRenderer>().bounds.extents.x;
     }
-
-    // Update is called once per frame
     void Update()
     {
         ObstacleMovement();
