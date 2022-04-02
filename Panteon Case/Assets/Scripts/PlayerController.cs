@@ -1,11 +1,13 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Mathematics;
 using UnityEditor;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    [SerializeField] private float rotateSpeed;
     [SerializeField] private float horizontalSpeed;
     [SerializeField] private float forwardSpeed;
     [SerializeField] Vector3 move;
@@ -16,7 +18,7 @@ public class PlayerController : MonoBehaviour
     private float firstMousePos;
     private Quaternion iniRot;
     private Rigidbody rb;
-    
+    private RaycastHit hit;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -31,6 +33,12 @@ public class PlayerController : MonoBehaviour
             Movement();
         }
     }
+
+    private void FixedUpdate()
+    {
+        rb.velocity = move ;
+    }
+
     private void Movement()
     {
         if (Input.GetMouseButtonDown(0))
@@ -48,11 +56,10 @@ public class PlayerController : MonoBehaviour
         {
             move = Vector3.forward * forwardSpeed;
         }
-        rb.velocity = move;
     }
 
     private void LateUpdate()
     {
-        transform.rotation = iniRot;
+        transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.LookRotation(move), Time.deltaTime * rotateSpeed);
     }
 }

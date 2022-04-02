@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
+using Unity.Mathematics;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,13 +20,16 @@ public class PlayerCollision : MonoBehaviour
     private Rigidbody rb;
     private bool finished;
     private Animator animator;
-    
+    private float originalY;
+    private quaternion ogRot;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
         paintPos = paintPosRef.transform.position;
         finished = false;
+        originalY = transform.position.y;
+        ogRot = transform.rotation;
     }
 
     private void Update()
@@ -39,6 +43,7 @@ public class PlayerCollision : MonoBehaviour
                 vcam2.Priority = 1;
                 rb.isKinematic = true;
                 wallAnimator.SetTrigger("isFinished");
+                transform.rotation =ogRot;
                 if (!(wallAnimator.GetCurrentAnimatorStateInfo(0).length > wallAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime ))
                 {
                     percText.gameObject.SetActive(true);
@@ -75,16 +80,20 @@ public class PlayerCollision : MonoBehaviour
             GetComponent<PlayerController>().passedFinish = true;
             finished = true;
             other.gameObject.SetActive(false);
+            rb.velocity = Vector3.zero;
         }
         else if (other.gameObject.CompareTag("PaintPos"))
         {
-            rb.velocity = Vector3.zero;
             animator.SetBool("isIdle",true);
         }
     }
 
     private void MovePaintPos()
     {
-        transform.position = Vector3.MoveTowards(transform.position,paintPos,0.6f*Time.deltaTime);
+        rb.velocity = Vector3.zero;
+        Vector3 pos = paintPos;
+        pos.y =originalY;
+        transform.position = Vector3.MoveTowards(transform.position,paintPos,Time.deltaTime );
+        transform.LookAt(pos);
     }
 }

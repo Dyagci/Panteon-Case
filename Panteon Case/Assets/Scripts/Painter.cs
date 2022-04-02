@@ -107,11 +107,13 @@ public class Painter : MonoBehaviour
                 touchedLastFrame = true;
                 return;
             }
+            else
+            {
+                touchedLastFrame = false;
+                return;
+            }
         }
-        else
-        {
-            return;
-        }
+        
         //wall = null;
         touchedLastFrame = false;
     }
