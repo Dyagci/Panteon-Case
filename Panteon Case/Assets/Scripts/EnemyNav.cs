@@ -8,10 +8,9 @@ public class EnemyNav : MonoBehaviour
     [SerializeField] private float horizontalSpeed;
     [SerializeField] private float forwardSpeed;
     [SerializeField] private Vector3 move;
-    private NavMeshAgent agent;
-    
     public GameObject finishline;
     public Rigidbody rb;
+    private NavMeshAgent agent;
     private Vector3 startPos;
     // Start is called before the first frame update
     void Start()

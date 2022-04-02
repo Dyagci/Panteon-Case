@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Cinemachine;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PlayerCollision : MonoBehaviour
 {
@@ -12,11 +13,12 @@ public class PlayerCollision : MonoBehaviour
     public CinemachineVirtualCamera vcam2;
     public GameObject startReference;
     public GameObject paintPosRef;
+    public Animator wallAnimator;
+    public Text percText;
     private Vector3 paintPos;
     private Rigidbody rb;
     private bool finished;
     private Animator animator;
-    
     
     private void Start()
     {
@@ -36,6 +38,11 @@ public class PlayerCollision : MonoBehaviour
                 vcam1.Priority = 0;
                 vcam2.Priority = 1;
                 rb.isKinematic = true;
+                wallAnimator.SetTrigger("isFinished");
+                if (!(wallAnimator.GetCurrentAnimatorStateInfo(0).length > wallAnimator.GetCurrentAnimatorStateInfo(0).normalizedTime ))
+                {
+                    percText.gameObject.SetActive(true);
+                }
             }
         }
     }
@@ -66,8 +73,8 @@ public class PlayerCollision : MonoBehaviour
         if (other.gameObject.CompareTag("FinishLine"))
         {
             GetComponent<PlayerController>().passedFinish = true;
-            
             finished = true;
+            other.gameObject.SetActive(false);
         }
         else if (other.gameObject.CompareTag("PaintPos"))
         {

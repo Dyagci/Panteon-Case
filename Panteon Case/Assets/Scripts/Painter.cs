@@ -18,13 +18,12 @@ public class Painter : MonoBehaviour
     public double paintedPercentage;
     public Camera cam;
     public Wall wall;
+    public Text percentageText;
     private bool touchedLastFrame;
     private int[,] pixels;
     private RaycastHit hit;
     private string percentage;
-    private Renderer renderer;
     
-    public Text percentageText;
     // Start is called before the first frame update
     void Start()
     {

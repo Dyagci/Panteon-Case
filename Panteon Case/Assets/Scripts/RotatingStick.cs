@@ -6,8 +6,8 @@ using Random = UnityEngine.Random;
 
 public class RotatingStick : MonoBehaviour
 {
-    [SerializeField]public int direction;
-    [SerializeField]public int rotateAngle;
+    [SerializeField] public int direction;
+    [SerializeField] public int rotateAngle;
     public float rotateSpeed;
     void Update()
     {

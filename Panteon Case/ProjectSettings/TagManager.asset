@@ -11,6 +11,8 @@ TagManager:
   - FinishLine
   - Floor
   - Wall
+  - PaintPos
+  - Sides
   layers:
   - Default
   - TransparentFX
