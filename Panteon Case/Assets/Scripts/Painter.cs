@@ -77,7 +77,6 @@ public class Painter : MonoBehaviour
                 {
                     for (float f = 0.01f; f < 1.00f; f+=0.01f)
                     {
-                        
                         var lerpX = (int) Mathf.Lerp(lastTouchPos.x, x, f);
                         var lerpY = (int) Mathf.Lerp(lastTouchPos.y, y, f);
                         if (Input.GetMouseButtonUp(0))

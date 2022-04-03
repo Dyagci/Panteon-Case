@@ -33,7 +33,6 @@ public class PlayerController : MonoBehaviour
             Movement();
         }
     }
-
     private void FixedUpdate()
     {
         rb.velocity = move ;

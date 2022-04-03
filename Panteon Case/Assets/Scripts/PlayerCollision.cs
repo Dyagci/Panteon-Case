@@ -22,6 +22,7 @@ public class PlayerCollision : MonoBehaviour
     private Animator animator;
     private float originalY;
     private quaternion ogRot;
+    private RaycastHit hit;
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -36,7 +37,6 @@ public class PlayerCollision : MonoBehaviour
     {
         if (finished)
         {
-            MovePaintPos();
             if (animator.GetBool("isIdle"))
             {
                 vcam1.Priority = 0;
@@ -56,6 +56,7 @@ public class PlayerCollision : MonoBehaviour
         if (collision.gameObject.CompareTag("Obstacle"))
         {
             gameObject.transform.position = startReference.transform.position;
+            animator.SetBool("isFalling",false);
         }
         else if (collision.gameObject.CompareTag("RotPlat"))
         {
@@ -81,19 +82,7 @@ public class PlayerCollision : MonoBehaviour
             finished = true;
             other.gameObject.SetActive(false);
             rb.velocity = Vector3.zero;
-        }
-        else if (other.gameObject.CompareTag("PaintPos"))
-        {
             animator.SetBool("isIdle",true);
         }
-    }
-
-    private void MovePaintPos()
-    {
-        rb.velocity = Vector3.zero;
-        Vector3 pos = paintPos;
-        pos.y =originalY;
-        transform.position = Vector3.MoveTowards(transform.position,paintPos,Time.deltaTime );
-        transform.LookAt(pos);
     }
 }

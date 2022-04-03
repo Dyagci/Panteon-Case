@@ -5,9 +5,10 @@ using UnityEngine;
 public class CameraFollow : MonoBehaviour
 {
     public GameObject player;
-    private Quaternion rot;
     public float offSetZ;
     public float offSetX;
+    private Quaternion rot;
+    
     // Start is called before the first frame update
     void Start()
     {

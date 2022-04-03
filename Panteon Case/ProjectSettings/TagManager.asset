@@ -13,6 +13,7 @@ TagManager:
   - Wall
   - PaintPos
   - Sides
+  - SafetyNet
   layers:
   - Default
   - TransparentFX
