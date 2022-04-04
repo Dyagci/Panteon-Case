@@ -52,6 +52,7 @@ public class EnemyNav : MonoBehaviour
 
     private void FixedUpdate()
     {
+        //Could add more cases but this allows a range of difficulties for bots which makes them more natural
         if (!isFinished)
         {
             agentVelocity.z = forwardSpeed;
@@ -63,6 +64,10 @@ public class EnemyNav : MonoBehaviour
             else if (blocked&& blockedCrossRight)
             {
                 agentVelocity.x = -horizontalSpeed;
+            }
+            else if (blockedCrossRight&&blockedCrossLeft)
+            {
+                agentVelocity.x = 0;
             }
             else if (blockedRight)
             {

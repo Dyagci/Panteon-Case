@@ -365,6 +365,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
+      propertyPath: thrust
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
       propertyPath: scoreBoard
       value: 
       objectReference: {fileID: 59540502}
@@ -921,6 +925,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
+      propertyPath: thrust
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
       propertyPath: scoreBoard
       value: 
@@ -2071,6 +2079,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
+      propertyPath: thrust
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
       propertyPath: scoreBoard
       value: 
       objectReference: {fileID: 59540502}
@@ -2836,6 +2848,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
+      propertyPath: thrust
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
       propertyPath: scoreBoard
       value: 
@@ -4088,6 +4104,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
+      propertyPath: thrust
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
       propertyPath: scoreBoard
       value: 
@@ -5828,6 +5848,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
+      propertyPath: thrust
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
       propertyPath: scoreBoard
       value: 
       objectReference: {fileID: 59540502}
@@ -6032,6 +6056,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
+      propertyPath: thrust
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
       propertyPath: scoreBoard
       value: 
@@ -6543,6 +6571,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
+      propertyPath: thrust
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
       propertyPath: scoreBoard
       value: 
       objectReference: {fileID: 59540502}
@@ -6747,6 +6779,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
+      propertyPath: thrust
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
       propertyPath: scoreBoard
       value: 
@@ -7863,6 +7899,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
+      propertyPath: thrust
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
       propertyPath: scoreBoard
       value: 
       objectReference: {fileID: 59540502}
@@ -8885,6 +8925,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
+      propertyPath: thrust
+      value: 1000
+      objectReference: {fileID: 0}
     - target: {fileID: 1391107621, guid: 246bd0a1fdc4df44a9b68a38ca14146f, type: 3}
       propertyPath: scoreBoard
       value: 
