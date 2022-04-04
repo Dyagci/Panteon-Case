@@ -4,29 +4,27 @@ using UnityEngine;
 
 public class EnemyCollision : MonoBehaviour
 {
+    [SerializeField] private GameObject startReference;
     [SerializeField] private Vector3 moveDirection;
     [SerializeField] private int thrust;
-    private Rigidbody rb;
-    [SerializeField] private GameObject startReference;
-
     public EnemyNav nav;
-    // Start is called before the first frame update
+    public ScoreBoard scoreBoard;
+    private Rigidbody rb;
+    private Animator animator;
+    private Vector3 startPos;
+    
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         nav = GetComponent<EnemyNav>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        animator = GetComponent<Animator>();
+        startPos = startReference.transform.position;
     }
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
         {
-            gameObject.transform.position = startReference.transform.position;
+            gameObject.transform.position = startPos;
         }
         else if (collision.gameObject.CompareTag("RotPlat"))
         {
@@ -42,13 +40,23 @@ public class EnemyCollision : MonoBehaviour
         {
             transform.parent = null;
         }
+        
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.CompareTag("FinishLine"))
+        if (other.gameObject.CompareTag("FinishLine") && other.gameObject.GetComponent<MeshRenderer>().enabled==false)
         {
             nav.isFinished = true;
+            GetComponent<CapsuleCollider>().enabled = false;
+            if (scoreBoard.FindPlacement(this.gameObject)==1)
+            {
+                animator.SetBool("hasWon",true);
+            }
+            else
+            {
+                animator.SetBool("hasLost",true);
+            }
         }
     }
 }

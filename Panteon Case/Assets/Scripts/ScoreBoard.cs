@@ -9,18 +9,25 @@ using UnityEngine.UI;
 public class ScoreBoard : MonoBehaviour
 {
     public GameObject[] players;
-    public GameObject player;
+    public PlayerController playerController;
     public Text text;
-    // Start is called before the first frame update
+    public int placement;
+    private GameObject player;
     void Start()
     {
-        
+        player = playerController.gameObject;
     }
-
-    // Update is called once per frame
     void Update()
     {
-        players = players.OrderBy( x => x.transform.position.z ).ToArray();
-        text.text = ""+(players.Length- ArrayUtility.IndexOf(players,player))+"/"+players.Length+ " Place";
+        if (!playerController.passedFinish)
+        {
+            players = players.OrderBy( x => x.transform.position.z ).ToArray();
+            text.text = ""+(players.Length- ArrayUtility.IndexOf(players,player))+"/"+players.Length+ " Place";
+        }
+    }
+
+    public int FindPlacement(GameObject gameObject)
+    {
+        return (players.Length - ArrayUtility.IndexOf(players, gameObject));
     }
 }

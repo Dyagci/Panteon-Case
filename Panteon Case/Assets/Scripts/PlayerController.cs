@@ -11,19 +11,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField] private float horizontalSpeed;
     [SerializeField] private float forwardSpeed;
     [SerializeField] Vector3 move;
-    public GameObject wall;
-    public Texture2D wallTexture;
     public bool passedFinish;
     private float movementAmount;
     private float firstMousePos;
-    private Quaternion iniRot;
     private Rigidbody rb;
     private RaycastHit hit;
+    private Vector3 pos;
     void Start()
     {
         rb = GetComponent<Rigidbody>();
         move = Vector3.forward * forwardSpeed;
-        iniRot = transform.rotation;
         passedFinish = false;
     }
     private void Update()
@@ -32,10 +29,14 @@ public class PlayerController : MonoBehaviour
         {
             Movement();
         }
+        else
+        {
+            rb.velocity = Vector3.zero;
+        }
     }
     private void FixedUpdate()
     {
-        rb.velocity = move ;
+        rb.velocity = move *Time.deltaTime;
     }
 
     private void Movement()
@@ -55,6 +56,7 @@ public class PlayerController : MonoBehaviour
         {
             move = Vector3.forward * forwardSpeed;
         }
+
     }
 
     private void LateUpdate()

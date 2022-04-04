@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using Cinemachine;
 using Unity.Mathematics;
 using UnityEngine;
+using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
 
 public class PlayerCollision : MonoBehaviour
@@ -13,31 +14,27 @@ public class PlayerCollision : MonoBehaviour
     public CinemachineVirtualCamera vcam1;
     public CinemachineVirtualCamera vcam2;
     public GameObject startReference;
-    public GameObject paintPosRef;
     public Animator wallAnimator;
+    public ScoreBoard scoreBoard;
     public Text percText;
-    private Vector3 paintPos;
     private Rigidbody rb;
     private bool finished;
     private Animator animator;
     private float originalY;
     private quaternion ogRot;
     private RaycastHit hit;
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
         animator = GetComponent<Animator>();
-        paintPos = paintPosRef.transform.position;
         finished = false;
-        originalY = transform.position.y;
-        ogRot = transform.rotation;
     }
-
     private void Update()
     {
         if (finished)
         {
-            if (animator.GetBool("isIdle"))
+            if (animator.GetBool("hasWon")||animator.GetBool("hasLost"))
             {
                 vcam1.Priority = 0;
                 vcam2.Priority = 1;
@@ -51,6 +48,7 @@ public class PlayerCollision : MonoBehaviour
             }
         }
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.CompareTag("Obstacle"))
@@ -81,8 +79,15 @@ public class PlayerCollision : MonoBehaviour
             GetComponent<PlayerController>().passedFinish = true;
             finished = true;
             other.gameObject.SetActive(false);
-            rb.velocity = Vector3.zero;
-            animator.SetBool("isIdle",true);
+            if (scoreBoard.FindPlacement(this.gameObject)==1)
+            {
+                animator.SetBool("hasWon",true);
+            }
+            else
+            {
+                animator.SetBool("hasLost",true);
+            }
+            GetComponent<CapsuleCollider>().enabled = false;
         }
     }
 }
