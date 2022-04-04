@@ -26,7 +26,15 @@ public class PlayerCollision : MonoBehaviour
 
     private void Awake()
     {
-        Screen.SetResolution(Screen.height,Screen.width,true);
+        if (Screen.height>Screen.width)
+        {
+            Screen.SetResolution(Screen.width,Screen.height,true);
+        }
+        else
+        {
+            Screen.SetResolution(Screen.height,Screen.width,true);
+        }
+        
     }
 
     private void Start()
