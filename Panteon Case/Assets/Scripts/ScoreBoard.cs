@@ -3,7 +3,6 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
-using UnityEditor;
 using UnityEngine.UI;
 
 public class ScoreBoard : MonoBehaviour
@@ -22,12 +21,12 @@ public class ScoreBoard : MonoBehaviour
         if (!playerController.passedFinish)
         {
             players = players.OrderBy( x => x.transform.position.z ).ToArray();
-            text.text = ""+(players.Length- ArrayUtility.IndexOf(players,player))+"/"+players.Length+ " Place";
+            text.text = ""+(players.Length- Array.IndexOf(players,player))+"/"+players.Length+ " Place";
         }
     }
 
     public int FindPlacement(GameObject gameObject)
     {
-        return (players.Length - ArrayUtility.IndexOf(players, gameObject));
+        return (players.Length - Array.IndexOf(players, gameObject));
     }
 }

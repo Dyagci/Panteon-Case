@@ -24,6 +24,11 @@ public class PlayerCollision : MonoBehaviour
     private quaternion ogRot;
     private RaycastHit hit;
 
+    private void Awake()
+    {
+        Screen.SetResolution(Screen.height,Screen.width,true);
+    }
+
     private void Start()
     {
         rb = GetComponent<Rigidbody>();
